@@ -86,6 +86,62 @@
     font-weight: 700;
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
   }
+ /* 可展开模块 */
+.toggle-box {
+  margin-top: 20px;
+  background: #f7f7f7;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.toggle-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 16px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  background: #f7f7f7;
+}
+
+.toggle-arrow {
+  transition: transform 0.25s ease;
+  font-size: 16px;
+}
+
+.toggle-box.open .toggle-arrow {
+  transform: rotate(90deg);
+}
+
+.toggle-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.toggle-box.open .toggle-content {
+  max-height: 500px;
+}
+
+/* 内部列表 */
+.toggle-list {
+  padding: 0 16px 14px;
+}
+
+.toggle-item {
+  display: flex;
+  gap: 10px;
+  font-size: 14px;
+  color: #333;
+  padding: 8px 0;
+  line-height: 1.5;
+}
+
+.toggle-item:not(:last-child) {
+  border-bottom: 1px solid #e5e5e5;
+}
+
 </style>
 </head>
 <body>
@@ -125,6 +181,45 @@
     🎵 TikTok
   </a>
 </div>
+ <div class="toggle-box" id="infoToggle">
+
+  <div class="toggle-header">
+    <span>Shipping & Payment Info</span>
+    <span class="toggle-arrow">▶</span>
+  </div>
+
+  <div class="toggle-content">
+    <div class="toggle-list">
+
+      <div class="toggle-item">
+        <span>🌍</span>
+        <span>Worldwide shipping available</span>
+      </div>
+
+      <div class="toggle-item">
+        <span>🚚</span>
+        <span>Fast & secure delivery with tracking</span>
+      </div>
+
+      <div class="toggle-item">
+        <span>💳</span>
+        <span>Pay with PayPal or credit card</span>
+      </div>
+
+      <div class="toggle-item">
+        <span>⭐</span>
+        <span>Premium quality · Carefully selected</span>
+      </div>
+
+      <div class="toggle-item">
+        <span>🔒</span>
+        <span>Your information remains confidential</span>
+      </div>
+
+    </div>
+  </div>
+
+</div>
 
 <!-- 底部 WhatsApp CTA -->
 <a
@@ -134,6 +229,14 @@
 >
   💬 Chat on WhatsApp
 </a>
+ <script>
+document.querySelectorAll(".toggle-header").forEach(header => {
+  header.addEventListener("click", () => {
+    const box = header.parentElement;
+    box.classList.toggle("open");
+  });
+});
+</script>
 
 </body>
 </html>
