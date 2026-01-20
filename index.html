@@ -161,32 +161,15 @@
     🛍️ Shop Now
   </a>
 
-  <a class="btn btn-secondary" href="https://example.com/new-arrivals" target="_blank">
-    ✨ New Arrivals
-  </a>
-
-  <a class="btn btn-secondary" href="https://example.com/collections" target="_blank">
-    👟 Collections
-  </a>
-
-  <a class="btn btn-outline" href="https://example.com/contact" target="_blank">
-    📩 Contact
-  </a>
-
   <!-- 社交按钮 -->
   <a class="btn btn-social" href="https://instagram.com/yourhandle" target="_blank">
     📸 Instagram
-  </a>
-
-  <a class="btn btn-social" href="https://tiktok.com/@yourhandle" target="_blank">
-    🎵 TikTok
   </a>
   <div class="toggle-box" id="infoToggle">
 
   <div class="toggle-header">
    <span class="toggle-arrow">▶</span>
     <span>Shipping & Payment Info</span>
-    
   </div>
 
   <div class="toggle-content">
@@ -218,11 +201,25 @@
       </div>
 
     </div>
+</div>
+   <div class="toggle-box" id="infoToggle">
+
+  <div class="toggle-header">
+   <span class="toggle-arrow">▶</span>
+    <span>about us</span>
+  </div>
+
+  <div class="toggle-content">
+    <div class="toggle-list">
+
+      <div class="toggle-item">
+        我们之手买高端
+      </div>
+
+    </div>
   </div>
 
 </div>
-</div>
-
 
 <!-- 底部 WhatsApp CTA -->
 <a
@@ -232,11 +229,21 @@
 >
   💬 Chat on WhatsApp
 </a>
- <script>
+<script>
 document.querySelectorAll(".toggle-header").forEach(header => {
   header.addEventListener("click", () => {
-    const box = header.parentElement;
-    box.classList.toggle("open");
+    const currentBox = header.closest(".toggle-box");
+    const isOpen = currentBox.classList.contains("open");
+
+    // 关闭所有
+    document.querySelectorAll(".toggle-box").forEach(box => {
+      box.classList.remove("open");
+    });
+
+    // 如果当前原来是关闭的，则打开
+    if (!isOpen) {
+      currentBox.classList.add("open");
+    }
   });
 });
 </script>
