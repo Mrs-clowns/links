@@ -96,7 +96,7 @@
 
 .toggle-header {
   display: flex;
-  justify-content: space-between;
+  justify-content: left;
   align-items: center;
   padding: 14px 16px;
   font-size: 15px;
@@ -107,6 +107,7 @@
 
 .toggle-arrow {
   transition: transform 0.25s ease;
+  margin-right:10px;
   font-size: 16px;
 }
 
@@ -183,8 +184,9 @@
   <div class="toggle-box" id="infoToggle">
 
   <div class="toggle-header">
+   <span class="toggle-arrow">▶</span>
     <span>Shipping & Payment Info</span>
-    <span class="toggle-arrow">▶</span>
+    
   </div>
 
   <div class="toggle-content">
