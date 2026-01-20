@@ -59,18 +59,20 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
   }
   /* 按钮 */
   .btn {
-    display: block;
-    width: 100%;
-    padding: 16px;
-    margin: 10px 0;
-    background: #25D366;
-    color: #fff;
-    text-decoration: none;
-    font-size: 16px;
-    border-radius: 10px;
-    font-weight: 900;
-    transition: 0.2s ease;
-  }
+  display: inline-flex;       /* 横向排列图标和文字 */
+  align-items: center;        /* 垂直居中 */
+  justify-content: center;    /* 整个按钮文字居中 */
+  gap: 8px;                   /* 图标和文字间距 */
+  background-color: #25D366;
+  color: #fff;
+  text-decoration: none;
+  padding: 12px 24px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 16px;
+  transition: 0.2s ease;
+  width: 100%;           /* 可选，保证按钮不太窄 */
+}
   .btn:hover {
     opacity: 0.9;
     transform: translateY(-2px);
@@ -100,6 +102,10 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
     text-decoration: none;
     font-weight: 900;
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+   display: inline-flex;       /* 横向排列图标和文字 */
+  align-items: center;        /* 垂直居中 */
+  justify-content: center;    /* 整个按钮文字居中 */
+  gap: 8px;                   /* 图标和文字间距 */
   }
  /* 可展开模块 */
 .toggle-box {
@@ -174,7 +180,13 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
 
   <!-- 主功能按钮 -->
   <a id="ws" class="btn" href="https://wa.me/8615006058723?text=Hello%2C%20I%20would%20like%20to%20order" target="_blank">
-     💬 Chat on WhatsApp
+   <span class="wa-icon" style="
+    display: block;
+">
+    <!-- WhatsApp SVG -->
+    <img src="https://i.ibb.co/0pfKsq8Y/icons8-whatsapp-48.png" alt="icons8 whatsapp 48" border="0" style="width: 20px;">
+  </span>
+     Chat on WhatsApp
   </a>
  <div class="toggle-box" id="infoToggle">
 
@@ -309,7 +321,12 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
   href="https://wa.me/8615006058723?text=Hello%2C%20I%20would%20like%20to%20order"
   target="_blank"
 >
-  💬 Chat on WhatsApp
+  <span class="wa-icon" style="
+    display: block;
+">
+    <!-- WhatsApp SVG -->
+    <img src="https://i.ibb.co/0pfKsq8Y/icons8-whatsapp-48.png" alt="icons8 whatsapp 48" border="0" style="width: 20px;">
+  </span> Chat on WhatsApp
 </a>
 <script>
 document.querySelectorAll(".toggle-header").forEach(header => {
