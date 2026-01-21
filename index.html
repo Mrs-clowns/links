@@ -392,7 +392,7 @@ observer.observe(target);
   <script>
 document.addEventListener('DOMContentLoaded', function () {
   // 已发送过，不再发送
-  if (getCookie('ttq_vc_sent')) return;
+  // if (getCookie('ttq_vc_sent')) return;
 
   if (typeof ttq !== 'undefined' && ttq.track) {
     ttq.track('ViewContent', {
@@ -402,9 +402,7 @@ document.addEventListener('DOMContentLoaded', function () {
           content_type: "product",
           content_name: "WhatsApp Landing Page"
         }
-      ],
-      value: 0,
-      currency: "USD"
+      ]
     });
 
     // 标记已发送（7 天）
