@@ -418,7 +418,7 @@ wsBtn.addEventListener('click', function () {
   // 判断是否已经上报过
   const reported = getCookie('tt_ws_clicked');
 
-  if (!reported && typeof ttq !== 'undefined') {
+  // if (!reported && typeof ttq !== 'undefined') {
     ttq.track('ClickButton', {
       contents: [
         {
@@ -433,7 +433,7 @@ wsBtn.addEventListener('click', function () {
 
     // 标记已上报（例如 7 天）
     setCookie('tt_ws_clicked', '1', 7);
-  }
+  // }
 
   // ⚠️ 不要 preventDefault
   // ⚠️ 不要 return false
