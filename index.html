@@ -412,9 +412,66 @@ document.addEventListener('DOMContentLoaded', function () {
 </script>
 
   <script>
-const wsBtn = document.querySelector('.waclick');
-const waUrl = "https://wa.me/8618596957269?text=Catalogue?"
-wsBtn.addEventListener('click', function () {
+    
+(function () {
+  const whatsappList = [
+    "8613860922358",
+  ];
+
+  const STORAGE_KEY = "assigned_whatsapp";
+
+  function assignWhatsApp() {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved && whatsappList.includes(saved)) {
+      return saved;
+    }
+
+    const slot = Math.floor(Date.now() / 5000);
+    const index = slot % whatsappList.length;
+    const selected = whatsappList[index];
+
+    localStorage.setItem(STORAGE_KEY, selected);
+    return selected;
+  }
+
+  function isMobile() {
+    return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  }
+
+  function supportsWhatsappProtocol() {
+    return isMobile();
+  }
+
+  function buildTkMessage({ name, id, tkUrl, price }) {
+  const hasName = name && name.trim();
+  const hasId   = id && id.trim();
+
+  if (!hasName || !hasId) {
+    return 'Product catalog?';
+  }
+
+  return `https://www.tiktok.com/@${hasName}/video/${hasId}\nPrice?`;
+  }
+
+  const whatsapp = assignWhatsApp();
+  const btn = document.getElementById("whatsappBtn");
+
+  if (!btn) return;
+const params = new URLSearchParams(location.search);
+
+const name  = params.get('name');
+const id    = params.get('id');
+const tkUrl = "https://www.tiktok.com/";
+const price = params.get('price') || 'On request';
+
+const message = buildTkMessage({ name, id, tkUrl, price });
+
+const cta = document.getElementById('cta');
+
+  const waMeUrl = "https://wa.me/" + whatsapp+"?text="+encodeURIComponent(message);
+  const waSchemeUrl = "whatsapp://send?phone=" + whatsapp+"&text=" +encodeURIComponent(message);
+  const wsBtn = document.querySelector('.waclick');
+  wsBtn.addEventListener('click', function () {
   // 判断是否已经上报过
   const reported = getCookie('tt_ws_clicked');
 
@@ -435,11 +492,11 @@ wsBtn.addEventListener('click', function () {
     setCookie('tt_ws_clicked', '1', 7);
   // }
 
-  // ⚠️ 不要 preventDefault
-  // ⚠️ 不要 return false
-  window.location.href = waUrl;
+  window.location.href = waMeUrl;
 });
-</script>
+})();
+  </script>
+
 
 </body>
 </html>
