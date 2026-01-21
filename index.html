@@ -177,7 +177,8 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
   <!-- 标题 / 简介 -->
   <div class="title">Orange shoes</div>
   <div class="subtitle">If you need to place an order, please click the button below to contact us</div>
-
+  <div class="subtitle">For the delivery of orders and long-term cooperation, please save us to your contact list. Let's stay in touch!</div>
+<div class="subtitle">👇👇👇 WhatsApp.👇👇👇</div>
   <!-- 主功能按钮 -->
   <a id="ws" class="btn waclick" target="_blank">
    <span class="wa-icon" style="
@@ -186,7 +187,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
     <!-- WhatsApp SVG -->
     <img src="https://i.ibb.co/0pfKsq8Y/icons8-whatsapp-48.png" alt="icons8 whatsapp 48" border="0" style="width: 20px;">
   </span>
-     Order through WhatsApp
+     Learn through WhatsApp
   </a>
  <div class="toggle-box" id="infoToggle">
 
@@ -224,6 +225,64 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
   </div>
 
 </div>
+
+  <div class="toggle-box" id="infoToggle">
+
+  <div class="toggle-header">
+   <span class="toggle-arrow">▶</span>
+    <span>How to place an order</span>
+  </div>
+
+  <div class="toggle-content">
+    <div class="toggle-list">
+
+      <div class="toggle-item">
+        If you need to make a purchase, you must contact our dedicated customer service through WhatsApp
+      </div>
+
+    </div>
+</div>
+  </div>
+<div class="toggle-box" id="infoToggle">
+
+  <div class="toggle-header">
+   <span class="toggle-arrow">▶</span>
+    <span>Shipping Terms</span>
+  </div>
+
+  <div class="toggle-content">
+    <div class="toggle-list">
+
+      <div class="toggle-item">
+        Usually: We ship through DHL or Fendx, and the shipping time is about 12 days
+        <br/>
+For the UK: We use Royal Mail for shipping.
+        <br/>
+Door to door delivery, if the goods are lost, we will resend them
+      </div>
+
+    </div>
+  </div>
+
+</div>
+  <div class="toggle-box" id="infoToggle">
+
+  <div class="toggle-header">
+   <span class="toggle-arrow">▶</span>
+    <span>How should I pay</span>
+  </div>
+
+  <div class="toggle-content">
+    <div class="toggle-list">
+
+      <div class="toggle-item">
+        We support payment methods such as PayPal, credit card, Apple Pay, Western Union, bank transfer, etc,
+      </div>
+
+    </div>
+  </div>
+
+</div>
  <div class="toggle-box" id="infoToggle">
 
   <div class="toggle-header">
@@ -242,59 +301,9 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
   </div>
 
 </div>
-  <div class="toggle-box" id="infoToggle">
-
-  <div class="toggle-header">
-   <span class="toggle-arrow">▶</span>
-    <span>How to place an order</span>
-  </div>
-
-  <div class="toggle-content">
-    <div class="toggle-list">
-
-      <div class="toggle-item">
-        If you need to make a purchase, you must contact our dedicated customer service through WhatsApp
-      </div>
-
-    </div>
-</div>
-  </div>
-   <div class="toggle-box" id="infoToggle">
-
-  <div class="toggle-header">
-   <span class="toggle-arrow">▶</span>
-    <span>Shipping Terms</span>
-  </div>
-
-  <div class="toggle-content">
-    <div class="toggle-list">
-
-      <div class="toggle-item">
-        We ship via DHL and Fendx, with a shipping time of approximately 12 days
-      </div>
-
-    </div>
-  </div>
-
-</div>
-   <div class="toggle-box" id="infoToggle">
-
-  <div class="toggle-header">
-   <span class="toggle-arrow">▶</span>
-    <span>How should I pay</span>
-  </div>
-
-  <div class="toggle-content">
-    <div class="toggle-list">
-
-      <div class="toggle-item">
-        We support payment methods such as PayPal, credit card, Apple Pay, Western Union, bank transfer, etc,
-      </div>
-
-    </div>
-  </div>
-
-</div>
+  
+   
+   
    <div class="toggle-box" id="infoToggle">
 
   <div class="toggle-header">
@@ -325,7 +334,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
 ">
     <!-- WhatsApp SVG -->
     <img src="https://i.ibb.co/0pfKsq8Y/icons8-whatsapp-48.png" alt="icons8 whatsapp 48" border="0" style="width: 20px;">
-  </span> Order through WhatsApp
+  </span> Learn through WhatsApp
 </a>
 <script>
 document.querySelectorAll(".toggle-header").forEach(header => {
@@ -383,7 +392,7 @@ observer.observe(target);
 
   <script>
 const wsBtn = document.querySelector('.waclick');
-const waUrl = "https://wa.me/8618596957269?text=Hello%2C%20I%20would%20like%20to%20order"
+const waUrl = "https://wa.me/8618596957269?text=Catalogue?"
 wsBtn.addEventListener('click', function () {
   // 判断是否已经上报过
   const reported = getCookie('tt_ws_clicked');
