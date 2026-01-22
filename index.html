@@ -464,24 +464,36 @@ const cta = document.getElementById('cta');
   const waMeUrl = "https://wa.me/" + whatsapp+"?text="+encodeURIComponent(message);
   const waSchemeUrl = "whatsapp://send?phone=" + whatsapp+"&text=" +encodeURIComponent(message);
   const wsBtn = document.querySelector('.waclick');
-  wsBtn.addEventListener('click', function () {
-  // 判断是否已经上报过
-  const reported = getCookie('tt_ws_clicked');
-ttq.track('ClickButton', {
-    contents: [
-      {
-        content_id: 'whatsapp_contact',
-        content_type: 'product',
-        content_name: 'WhatsApp Contact'
-      }
-    ],
-    value: 1,
-    currency: 'USD'
-  });
+  .addEventListener('click', function () {
+
+  let jumped = false;
+  const jump = () => {
+    if (jumped) return;
+    jumped = true;
     window.location.href = waMeUrl;
+  };
 
+  // 最多等 500ms（兜底）
+  setTimeout(jump, 500);
 
-  
+  if (!getCookie('tt_ws_clicked') && window.ttq) {
+    setCookie('tt_ws_clicked', '1', 1);
+
+    ttq.track('ClickButton', {
+      contents: [
+        {
+          content_id: 'whatsapp_contact',
+          content_type: 'product',
+          content_name: 'WhatsApp Contact'
+        }
+      ],
+      value: 1,
+      currency: 'USD',
+      event_callback: jump
+    });
+  } else {
+    jump();
+  }
 });
 })();
   </script>
