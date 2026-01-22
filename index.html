@@ -451,7 +451,7 @@ document.addEventListener('DOMContentLoaded', function () {
     return 'Product catalog?';
   }
 
-  return `https://www.tiktok.com/@${hasName}/video/${hasId}\nPrice?`;
+  return `https://www.tiktok.com/@${hasName}/video/${hasId}${utm ? `?utm=${utm}` : ''}\nPrice?`;
   }
 
   const whatsapp = assignWhatsApp();
@@ -460,10 +460,11 @@ const params = new URLSearchParams(location.search);
 
 const name  = params.get('name');
 const id    = params.get('id');
+  const utm    = params.get('utm_campaign');
 const tkUrl = "https://www.tiktok.com/";
 const price = params.get('price') || 'On request';
 
-const message = buildTkMessage({ name, id, tkUrl, price });
+const message = buildTkMessage({ name, id, tkUrl, utm });
 
 const cta = document.getElementById('cta');
 
