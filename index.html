@@ -10,9 +10,7 @@
   w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
 var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
 ;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
-
-
-  ttq.load('D5OF51JC77U3FFO97PG0');
+  ttq.load('D5P4RERC77U6BSHUDRE0');
   ttq.page();
 }(window, document, 'ttq');
 </script>
@@ -172,11 +170,10 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
 <div class="container">
   <!-- 头像 -->
   <div class="avatar">
-    <img src="https://i.ibb.co/7JJynzYP/927f71bc6236259024fe3629311100c9.png" alt="Shoes Shoes">
+    <img src="https://i.ibb.co/mVd0YhFC/a67d7295c8b1b72b3e50e4ec5092d341.png" alt="Shoes Shoes">
   </div>
   <!-- 标题 / 简介 -->
-  <div class="title">Angela shoes</div>
-  <div class="subtitle">If you need to place an order, please click the button below to contact us</div>
+  <div class="title">Betsy</div>
   <div class="subtitle">For the delivery of orders and long-term cooperation, please save us to your contact list. Let's stay in touch!</div>
 <div class="subtitle">👇👇👇 WhatsApp.👇👇👇</div>
   <!-- 主功能按钮 -->
@@ -187,7 +184,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
     <!-- WhatsApp SVG -->
     <img src="https://i.ibb.co/0pfKsq8Y/icons8-whatsapp-48.png" alt="icons8 whatsapp 48" border="0" style="width: 20px;">
   </span>
-     Learn through WhatsApp
+     Learn more through WhatsApp
   </a>
  <div class="toggle-box" id="infoToggle">
 
@@ -334,7 +331,7 @@ Door to door delivery, if the goods are lost, we will resend them
 ">
     <!-- WhatsApp SVG -->
     <img src="https://i.ibb.co/0pfKsq8Y/icons8-whatsapp-48.png" alt="icons8 whatsapp 48" border="0" style="width: 20px;">
-  </span> Learn through WhatsApp
+  </span> Learn more through WhatsApp
 </a>
 <script>
 document.querySelectorAll(".toggle-header").forEach(header => {
@@ -415,8 +412,8 @@ document.addEventListener('DOMContentLoaded', function () {
     
 (function () {
   const whatsappList = [
-    "8613860922358",
-    "8615759901870"
+    "8615006058723",
+    "8615306065719"
   ];
 
   const STORAGE_KEY = "assigned_whatsapp";
@@ -443,7 +440,7 @@ document.addEventListener('DOMContentLoaded', function () {
     return isMobile();
   }
 
-  function buildTkMessage({ name, id, tkUrl, price }) {
+  function buildTkMessage({ name, id, tkUrl, utm }) {
   const hasName = name && name.trim();
   const hasId   = id && id.trim();
 
@@ -451,7 +448,7 @@ document.addEventListener('DOMContentLoaded', function () {
     return 'Product catalog?';
   }
 
-  return `https://www.tiktok.com/@${hasName}/video/${hasId}\nPrice?`;
+ return `https://www.tiktok.com/@${hasName}/video/${hasId}${utm ? `?utm=${utm}` : ''}\nPrice?`;
   }
 
   const whatsapp = assignWhatsApp();
@@ -460,10 +457,12 @@ const params = new URLSearchParams(location.search);
 
 const name  = params.get('name');
 const id    = params.get('id');
+const utm    = params.get('utm_campaign');
+  
 const tkUrl = "https://www.tiktok.com/";
 const price = params.get('price') || 'On request';
 
-const message = buildTkMessage({ name, id, tkUrl, price });
+const message = buildTkMessage({ name, id, tkUrl, utm });
 
 const cta = document.getElementById('cta');
 
