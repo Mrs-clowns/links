@@ -467,19 +467,6 @@ const cta = document.getElementById('cta');
   const wsBtn = document.querySelector('.waclick');
   wsBtn.addEventListener('click', function () {
 
-  let jumped = false;
-  const jump = () => {
-    if (jumped) return;
-    jumped = true;
-    window.location.href = waMeUrl;
-  };
-
-  // 最多等 500ms（兜底）
-  setTimeout(jump, 500);
-
-  if (!getCookie('tt_ws_clicked') && window.ttq) {
-    setCookie('tt_ws_clicked', '1', 1);
-
     ttq.track('ClickButton', {
       contents: [
         {
@@ -490,11 +477,9 @@ const cta = document.getElementById('cta');
       ],
       value: 1,
       currency: 'USD',
-      event_callback: jump
     });
-  } else {
-    jump();
-  }
+    window.location.href = waMeUrl;
+  let jumped = false;
 });
 })();
   </script>
