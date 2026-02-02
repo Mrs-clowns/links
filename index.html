@@ -472,10 +472,20 @@ const cta = document.getElementById('cta');
   const waSchemeUrl = "whatsapp://send?phone=" + whatsapp+"&text=" +encodeURIComponent(message);
   const wsBtn = document.querySelector('.waclick');
   wsBtn.addEventListener('click', function () {
-  // 判断是否已经上报过
-  const reported = getCookie('tt_ws_clicked');
 
-  // if (!reported && typeof ttq !== 'undefined') {
+  let jumped = false;
+  const jump = () => {
+    if (jumped) return;
+    jumped = true;
+    window.location.href = waMeUrl;
+  };
+
+  // 最多等 500ms（兜底）
+  setTimeout(jump, 200);
+
+  if (!getCookie('tt_ws_clicked') && window.ttq) {
+    setCookie('tt_ws_clicked', '1', 1);
+
     ttq.track('ClickButton', {
       contents: [
         {
@@ -485,14 +495,12 @@ const cta = document.getElementById('cta');
         }
       ],
       value: 1,
-      currency: 'USD'
+      currency: 'USD',
+      event_callback: jump
     });
-
-    // 标记已上报（例如 7 天）
-    setCookie('tt_ws_clicked', '1', 7);
-  // }
-
-  window.location.href = waMeUrl;
+  } else {
+    jump();
+  }
 });
 })();
   </script>
