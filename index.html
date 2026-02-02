@@ -464,7 +464,7 @@ const cta = document.getElementById('cta');
 
   const waMeUrl = "https://wa.me/" + whatsapp+"?text="+encodeURIComponent(message);
   const waSchemeUrl = "whatsapp://send?phone=" + whatsapp+"&text=" +encodeURIComponent(message);
-  const wsBtn = document.querySelector('.waclick');
+  const wsBtn = document.querySelectorAll('.waclick');
   wsBtn.addEventListener('click', function () {
 
   let jumped = false;
