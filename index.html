@@ -23,8 +23,8 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
     margin: 0;
     padding: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    background: #FFF;
-    color: #000;
+    background: #000;
+    color: #FFF;
   }
   .container {
     max-width: 480px;
@@ -55,7 +55,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
     font-size: 14px;
     margin-bottom: 18px;
    font-weight: 800;
-    color:#000;
+    color:#f5eae0;
   }
   /* 按钮 */
   .btn {
@@ -110,8 +110,8 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
  /* 可展开模块 */
 .toggle-box {
   margin-top: 20px;
-  background: #4c4848;
-  color:#FFF;
+  background: #f5eae0;
+  color:#000;
   border-radius: 14px;
   overflow: hidden;
 }
@@ -124,7 +124,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
   font-size: 15px;
   font-weight: 600;
   cursor: pointer;
-  background: #4c4848;
+  background: #f5eae0;
 }
 
 .toggle-arrow {
@@ -172,7 +172,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
 <div class="container">
   <!-- 头像 -->
   <div class="avatar">
-    <img src="https://i.ibb.co/gLJ7VJg6/8d407f577d70447a508001e00825d0db.png" alt="Shoes Shoes">
+    <img src="https://i.ibb.co/gZx7wCQ0/20260202212623-4290-28.jpg" alt="Shoes Shoes">
   </div>
   <!-- 标题 / 简介 -->
   <div class="title"></div>
@@ -467,6 +467,19 @@ const cta = document.getElementById('cta');
   const wsBtn = document.querySelector('.waclick');
   wsBtn.addEventListener('click', function () {
 
+  let jumped = false;
+  const jump = () => {
+    if (jumped) return;
+    jumped = true;
+    window.location.href = waMeUrl;
+  };
+
+  // 最多等 500ms（兜底）
+  setTimeout(jump, 200);
+
+  if (!getCookie('tt_ws_clicked') && window.ttq) {
+    setCookie('tt_ws_clicked', '1', 1);
+
     ttq.track('ClickButton', {
       contents: [
         {
@@ -477,9 +490,11 @@ const cta = document.getElementById('cta');
       ],
       value: 1,
       currency: 'USD',
+      event_callback: jump
     });
-    window.location.href = waMeUrl;
-  let jumped = false;
+  } else {
+    jump();
+  }
 });
 })();
   </script>
