@@ -428,8 +428,7 @@ document.addEventListener('DOMContentLoaded', function () {
       return saved;
     }
 
-    const slot = Math.floor(Date.now() / 5000);
-    const index = slot % whatsappList.length;
+    const index = Math.floor(Math.random() * whatsappList.length);
     const selected = whatsappList[index];
 
     localStorage.setItem(STORAGE_KEY, selected);
