@@ -424,7 +424,7 @@ wsBtns.forEach(wsBtn => {
       e.preventDefault();
       
       let jumped = false;
-      fbq('track', 'Contact');
+      fbq('track', 'Purchase', {value: 1.00, currency: 'USD'});
       
       const jump = () => {
         if (jumped) return;
