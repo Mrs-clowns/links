@@ -342,6 +342,7 @@ Door to door delivery, if the goods are lost, we will resend them
   </span> Learn more through WhatsApp
 </a>
 <script>
+fbq('track', 'ViewContent');
 document.querySelectorAll(".toggle-header").forEach(header => {
   header.addEventListener("click", () => {
     const currentBox = header.closest(".toggle-box");
@@ -424,6 +425,7 @@ wsBtns.forEach(wsBtn => {
   wsBtn.addEventListener('click', function () {
 
     let jumped = false;
+   fbq('track', 'Contact');
     const jump = () => {
       if (jumped) return;
       jumped = true;
