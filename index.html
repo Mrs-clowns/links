@@ -422,19 +422,20 @@ const cta = document.getElementById('cta');
     const wsBtns = document.querySelectorAll('.waclick');
 
 wsBtns.forEach(wsBtn => {
-  wsBtn.addEventListener('click', function () {
-
-    let jumped = false;
-   fbq('track', 'Contact');
-    const jump = () => {
-      if (jumped) return;
-      jumped = true;
-      window.location.href = waMeUrl;
-    };
-
-    jump();
+    wsBtn.addEventListener('click', function (e) {
+      e.preventDefault(); // 阻止 <a> 标签可能产生的默认行为
+      
+      let jumped = false;
+      fbq('track', 'Contact');
+      
+      const jump = () => {
+        if (jumped) return;
+        jumped = true;
+        window.open(waMeUrl, '_blank'); 
+      };
+      jump();
+    });
   });
-});
 })();
   </script>
 
