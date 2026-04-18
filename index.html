@@ -423,7 +423,7 @@ const cta = document.getElementById('cta');
 
 wsBtns.forEach(wsBtn => {
     wsBtn.addEventListener('click', function (e) {
-      e.preventDefault(); // 阻止 <a> 标签可能产生的默认行为
+      e.preventDefault();
       
       let jumped = false;
       fbq('track', 'Contact');
@@ -431,9 +431,9 @@ wsBtns.forEach(wsBtn => {
       const jump = () => {
         if (jumped) return;
         jumped = true;
-        window.open(waMeUrl, '_blank'); 
+        window.location.href = waMeUrl; 
       };
-      jump();
+      setTimeout(jump, 300);
     });
   });
 })();
