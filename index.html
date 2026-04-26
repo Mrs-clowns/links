@@ -2,26 +2,21 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
- <meta name="facebook-domain-verification" content="1w1iluyejmsr42lk6cnstfhvzu3gwi" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Shoes</title>
-<!-- Meta Pixel Code -->
+<!-- TikTok Pixel Code Start -->
 <script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '961345303208149');
-fbq('track', 'PageView');
+!function (w, d, t) {
+  w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
+var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
+;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
+
+
+  ttq.load('D7N2F93C77UASIGOD6P0');
+  ttq.page();
+}(window, document, 'ttq');
 </script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=961345303208149&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
+<!-- TikTok Pixel Code End -->
 <style>
   * { box-sizing: border-box; }
   body {
@@ -177,11 +172,12 @@ src="https://www.facebook.com/tr?id=961345303208149&ev=PageView&noscript=1"
 <div class="container">
   <!-- 头像 -->
   <div class="avatar">
-    <img src="https://i.ibb.co/b9qdLMS/6d1718616ac789b2bbe03a6d1ed84014.jpg" alt="6d1718616ac789b2bbe03a6d1ed84014" border="0">
+    <img src="https://i.ibb.co/mFNgTNNX/8d20d74bda97baaf3e64ec1f5fd2f478.jpg" alt="8d20d74bda97baaf3e64ec1f5fd2f478" border="0">
   </div>
   <!-- 标题 / 简介 -->
   <div class="title"></div>
-  <div class="subtitle">For the delivery of orders and long-term cooperation, please save us to your contact list. <br/>Let's stay in touch!<br/>👇👇👇 WhatsApp.👇👇👇</div>
+  <div class="subtitle">For the delivery of orders and long-term cooperation, please save us to your contact list. Let's stay in touch!</div>
+<div class="subtitle">👇👇👇 WhatsApp.👇👇👇</div>
   <!-- 主功能按钮 -->
   <a id="ws" class="btn waclick" target="_blank">
    <span class="wa-icon" style="
@@ -340,7 +336,6 @@ Door to door delivery, if the goods are lost, we will resend them
   </span> Learn more through WhatsApp
 </a>
 <script>
-fbq('track', 'ViewContent');
 document.querySelectorAll(".toggle-header").forEach(header => {
   header.addEventListener("click", () => {
     const currentBox = header.closest(".toggle-box");
@@ -394,6 +389,10 @@ const observer = new IntersectionObserver(entries => {
 observer.observe(target);
 </script>
   <script>
+document.addEventListener('DOMContentLoaded', function () {
+  // 已发送过，不再发送
+  // if (getCookie('ttq_vc_sent')) return;
+
   if (typeof ttq !== 'undefined' && ttq.track) {
     ttq.track('ViewContent', {
       contents: [
@@ -408,32 +407,102 @@ observer.observe(target);
     // 标记已发送（7 天）
     setCookie('ttq_vc_sent', '1', 1);
   }
+});
 </script>
 
   <script>
     
 (function () {
+  const whatsappList = [
+    "8618596957269"
+  ];
+
+  const STORAGE_KEY = "assigned_whatsapp";
+
+  function assignWhatsApp() {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved && whatsappList.includes(saved)) {
+      return saved;
+    }
+
+    const slot = Math.floor(Date.now() / 5000);
+    const index = slot % whatsappList.length;
+    const selected = whatsappList[index];
+
+    localStorage.setItem(STORAGE_KEY, selected);
+    return selected;
+  }
+
+  function isMobile() {
+    return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  }
+
+  function supportsWhatsappProtocol() {
+    return isMobile();
+  }
+
+  function buildTkMessage({ name, id, tkUrl, utm }) {
+  const hasName = name && name.trim();
+  const hasId   = id && id.trim();
+
+  if (!hasName || !hasId) {
+    return 'Product catalog?';
+  }
+
+ return `https://www.tiktok.com/@${hasName}/video/${hasId}${utm ? `?utm=${utm}` : ''}\nPrice?`;
+  }
+
+  const whatsapp = assignWhatsApp();
+
+const params = new URLSearchParams(location.search);
+
+const name  = params.get('name');
+const id    = params.get('id');
+const utm    = params.get('utm_campaign');
+  
+const tkUrl = "https://www.tiktok.com/";
+const price = params.get('price') || 'On request';
+
+const message = buildTkMessage({ name, id, tkUrl, utm });
+
 const cta = document.getElementById('cta');
 
-  const waMeUrl = "https://api.whatsapp.com/message/DWRAUJX4GTXDB1";
-
-    const wsBtns = document.querySelectorAll('.waclick');
+  const waMeUrl = "https://wa.me/" + whatsapp+"?text="+encodeURIComponent(message);
+  const waSchemeUrl = "whatsapp://send?phone=" + whatsapp+"&text=" +encodeURIComponent(message);
+  const wsBtns = document.querySelectorAll('.waclick');
 
 wsBtns.forEach(wsBtn => {
-    wsBtn.addEventListener('click', function (e) {
-      e.preventDefault();
-      
-      let jumped = false;
-      fbq('track', 'Purchase', {value: 1.00, currency: 'USD'});
-      
-      const jump = () => {
-        if (jumped) return;
-        jumped = true;
-        window.location.href = waMeUrl; 
-      };
-      setTimeout(jump, 300);
-    });
+  wsBtn.addEventListener('click', function () {
+
+    let jumped = false;
+    const jump = () => {
+      if (jumped) return;
+      jumped = true;
+      window.location.href = waMeUrl;
+    };
+
+    // 兜底
+    setTimeout(jump, 50);
+
+    if (!getCookie('tt_ws_clicked') && window.ttq && typeof ttq.track === 'function') {
+
+      ttq.track('ClickButton', {
+        contents: [
+          {
+            content_id: 'whatsapp_contact',
+            content_type: 'product',
+            content_name: 'WhatsApp Contact'
+          }
+        ],
+        value: 1,
+        currency: 'USD',
+        event_callback: jump
+      });
+    } else {
+      jump();
+    }
   });
+});
 })();
   </script>
 
