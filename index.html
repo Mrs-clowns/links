@@ -4,19 +4,47 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Shoe</title>
-<!-- TikTok Pixel Code Start -->
+<link rel="preconnect" href="https://connect.facebook.net">
+<link rel="preconnect" href="https://fb-ads.taptus.com" crossorigin>
+<!-- ============ Facebook 追踪配置（域名驱动）============
+     Pixel ID 不写死：按当前访问域名向后台 /api/lp-config 读取并动态 init。
+     ViewContent 在加载时由 track-external.js 触发；AddToCart 由点击 .waclick 触发。 -->
 <script>
-!function (w, d, t) {
-  w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
-var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
-;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
+  window.__LP__ = {
+    endpoint: 'https://fb-ads.taptus.com',
+    clickEvent: 'AddToCart',   // 点 .waclick → 发 AddToCart（浏览器 Pixel + 服务端 CAPI 去重）
+    offer: 'Shoe',             // content_name（可改）
+    currency: 'BRL'
+  };
+  (function () {
+    var LP = window.__LP__;
+    // Meta Pixel 基础代码（队列先就绪；init 等后台返回 pixelId 后再调，避免打到错误像素）
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+    document,'script','https://connect.facebook.net/en_US/fbevents.js');
 
-
-  ttq.load('D7NOKDBC77UDO1RDP9N0');
-  ttq.page();
-}(window, document, 'ttq');
+    function ready(cfg) {
+      cfg = cfg || {};
+      if (cfg.pixelId && !LP.pixelId) LP.pixelId = cfg.pixelId;
+      if (cfg.offer && (LP.offer == null)) LP.offer = cfg.offer;
+      if (cfg.currency && (LP.currency == null)) LP.currency = cfg.currency;
+      if (LP.pixelId && !LP.__pxInit) {
+        LP.__pxInit = true;
+        try { fbq('init', LP.pixelId); fbq('track', 'PageView'); } catch (e) {}
+      }
+      window.__LP_READY__ = true;
+      try { window.dispatchEvent(new Event('lp-ready')); } catch (e) {}
+    }
+    // 按当前域名向后台要 pixelId
+    fetch(LP.endpoint + '/api/lp-config?host=' + encodeURIComponent(location.hostname), { mode: 'cors' })
+      .then(function (r) { return r.json(); })
+      .then(function (cfg) { ready(cfg && cfg.ok ? cfg : {}); })
+      .catch(function () { ready({}); });
+  })();
 </script>
-<!-- TikTok Pixel Code End -->
+<!-- ==================================================== -->
 <style>
   * { box-sizing: border-box; }
   body {
@@ -388,27 +416,6 @@ const observer = new IntersectionObserver(entries => {
 // 开始观察
 observer.observe(target);
 </script>
-  <script>
-document.addEventListener('DOMContentLoaded', function () {
-  // 已发送过，不再发送
-  // if (getCookie('ttq_vc_sent')) return;
-
-  if (typeof ttq !== 'undefined' && ttq.track) {
-    ttq.track('ViewContent', {
-      contents: [
-        {
-          content_id: "lp_294",
-          content_type: "product",
-          content_name: "WhatsApp Landing Page"
-        }
-      ]
-    });
-
-    // 标记已发送（7 天）
-    setCookie('ttq_vc_sent', '1', 1);
-  }
-});
-</script>
 
   <script>
     
@@ -481,31 +488,17 @@ wsBtns.forEach(wsBtn => {
       window.location.href = waMeUrl;
     };
 
-    // 兜底
-    setTimeout(jump, 50);
+    // 点击 → 发 Facebook AddToCart（浏览器 Pixel + 服务端 CAPI，同 eventID 去重）
+    try { if (window.trackClick) trackClick('waclick'); } catch (e) {}
 
-    if (!getCookie('tt_ws_clicked') && window.ttq && typeof ttq.track === 'function') {
-
-      ttq.track('ClickButton', {
-        contents: [
-          {
-            content_id: 'whatsapp_contact',
-            content_type: 'product',
-            content_name: 'WhatsApp Contact'
-          }
-        ],
-        value: 1,
-        currency: 'USD',
-        event_callback: jump
-      });
-    } else {
-      jump();
-    }
+    // 给 Pixel 一点时间发出后跳转；CAPI 用 beacon，不受跳转影响
+    setTimeout(jump, 120);
   });
 });
 })();
   </script>
 
-
+  <!-- 跨域上报到采集服务器：记点击(带本域名)、ViewContent、trackClick(AddToCart) -->
+  <script defer src="https://fb-ads.taptus.com/static/track-external.js?v=3"></script>
 </body>
 </html>
